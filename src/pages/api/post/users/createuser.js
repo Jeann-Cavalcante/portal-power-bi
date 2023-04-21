@@ -33,7 +33,7 @@ export default async function createUser(req, res) {
         role: true,
       },
     }).catch((error) => {
-      if(error.code === "P2002") return res.status(400).json({ error: true, message: "Email já cadastrado" });
+      if(error.code === "P2002") return res.status(409).json({ error: true, message: "Email já cadastrado" });
       res.status(400).json({ error: true, message: "Erro ao criar usuário", error });
       console.log(error);
     });

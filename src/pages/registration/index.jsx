@@ -37,10 +37,11 @@ const Registration = () => {
     });
 
     const result = await response.json();
-
     if (result.error) {
       toast.error(result.message);
-      setErrorEmail({ error: true, message: result.message });
+      if(response.status === 409){
+        setErrorEmail({ error: true, message: result.message });
+      }
       setLoading(false);
       return;
     }
