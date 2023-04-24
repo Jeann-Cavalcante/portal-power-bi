@@ -1,9 +1,11 @@
 import Logo from "@/components/ui/Logo";
 import { Input } from "@chakra-ui/react";
+import { getServerSession } from "next-auth";
 import { signIn, useSession } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { authOptions } from "../api/auth/[...nextauth]";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -28,7 +30,7 @@ const Login = () => {
       return;
     }
     
-    // router.push('/');
+    router.push('/');
     
     console.log(session);
     // console.log(jwt);
@@ -87,20 +89,22 @@ const Login = () => {
   );
 };
 
+export async function getServerSideProps(context) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  if (session) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {
+      session,
+    },
+  };
+}
 export default Login;
-
-// export const getServerSideProps = async (context) => {
-//   const session = await unstable_getServerSession(
-//     context.req, context.res, authOptions
-//   );
-//   if (session) {
-//     return {
-//       redirect: {
-//         destination: "/",
-//         permanent: false,
-//       },
-//     };
-//   }
-
-
-// };

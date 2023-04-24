@@ -20,6 +20,7 @@ const Registration = () => {
   } = useForm();
 
   async function onSubmit(data) {
+    console.log('chegou aqui');
     setLoading(true);
     const body = {
       name: data.name,
@@ -103,13 +104,12 @@ const Registration = () => {
               {...register("email", { required: "Campo obrigatório" })}
             />
             <div className="h-[30px]">
-              {errors.email ||
-                (errorEmail && (
+              {errors.email  && (
                   <span className="text-red-500 text-sm">
                     {errors.email?.message}
                     {errorEmail?.message}
                   </span>
-                ))}
+                )}
             </div>
           </div>
 
