@@ -8,7 +8,7 @@ const Layout = ({children}) => {
       
       <div className="flex flex-col min-h-full max-w-screen flex-1">
         <Header />
-        <main className="bg-zinc-950 overflow-auto scrollbar-hidden flex-1 md:rounded-2xl">
+        <main className="bg-zinc-950 overflow-auto scrollbar-hidden flex-1 md:rounded-2xl p-6">
           {children}
         </main>
       </div>
