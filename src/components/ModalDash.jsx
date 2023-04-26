@@ -8,9 +8,11 @@ import {
   ModalCloseButton,
   Button,
   Input,
+  Spinner,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 const ModalDash = ({isOpen, onClose}) => {
   const [loading, setLoading] = useState(false);
@@ -18,17 +20,49 @@ const ModalDash = ({isOpen, onClose}) => {
   const {
     register,
     handleSubmit,
-    watch,
+    setError,
     formState: { errors },
   } = useForm();
 
-  async function onSubmit(data) {}
+  async function onSubmit(data) {
+    setLoading(true);
+    console.log(data);
+    const response = await fetch("http://localhost:3000/api/post/dashs/create", {
+      headers: { "Content-Type": "application/json" },
+      method: "POST",
+      body: JSON.stringify(data),
+    });
+
+    const api = await response.json();
+
+    console.log(api);
+
+    if (api.error) {
+      toast.error(api.message);
+        if(api.message === "Slug já cadastrado"){
+          setError("slug", {
+            type: "manual",
+            message: api.message,
+          });
+
+        }
+      setLoading(false);
+
+      return;
+    }
+
+    toast.success(api.message);
+
+    setLoading(false);
+
+    onClose();
+  }
 
   return (
    
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay  />
-        <ModalContent style={{ background: "#18181b", color: "#f4f4f5" }}>
+        <ModalContent style={{ background: "#18181b", color: "#f4f4f5", width: '600px', maxWidth: '90%' }}>
           <ModalHeader>Novo Dashboard</ModalHeader>
           <ModalCloseButton />
           <ModalBody>

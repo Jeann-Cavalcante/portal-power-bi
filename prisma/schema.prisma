@@ -28,7 +28,7 @@ model Dash {
   id        Int        @id @default(autoincrement())
   name      String
   category  String
-  slug      String
+  slug      String     @unique
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
   DashUser  DashUser[]
