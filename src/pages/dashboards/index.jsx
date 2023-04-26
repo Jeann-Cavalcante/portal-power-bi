@@ -10,18 +10,28 @@ import {
   Td,
   TableCaption,
   TableContainer,
+  Modal,
+  useDisclosure,
 } from "@chakra-ui/react";
+import ModalDash from "@/components/ModalDash";
+import { useState } from "react";
+
 
 const Dashboards = () => {
-  // console.log(session);
+  const { isOpen, onClose, onOpen } = useDisclosure();
+
+
   return (
     <Layout>
       <h1 className="mb-8 text-2xl font-bold">Dashboards</h1>
 
-      <div className="rounded-xl p-4 bg-zinc-900">
+      <div className="rounded-xl  p-2 sm:p-4 bg-zinc-900 w-full lg:max-w-[1200px] mx-auto">
         <div className="flex mb-10 justify-between items-center">
           <h2 className="text-xl font-semibold">Relatórios</h2>
-          <button className="bg-emerald-700 p-3 rounded-xl font-semibold">
+          <button
+            onClick={onOpen}
+            className="bg-emerald-700 p-3 rounded-xl font-semibold"
+          >
             Cadastrar
           </button>
         </div>
@@ -39,7 +49,7 @@ const Dashboards = () => {
             <Tbody>
               <Tr>
                 <Td>inches</Td>
-                <Td>millimetres (mm)</Td>
+                <Td>millimetres dncsldcnlscnlsdnc (mm)</Td>
                 <Td isNumeric>25.4</Td>
               </Tr>
               <Tr>
@@ -56,6 +66,8 @@ const Dashboards = () => {
           </Table>
         </TableContainer>
       </div>
+
+      {isOpen && <ModalDash isOpen={isOpen} onClose={onClose} />}
     </Layout>
   );
 }

@@ -12,7 +12,7 @@ const Header = () => {
     
   }
   return (
-    <header className="p-4 flex justify-between items-center">
+    <header className="p-4 flex justify-between items-center bg-zinc-900">
       <List
         className="text-zinc-600 cursor-pointer duration-300 hover:text-emerald-700"
         size={32}
