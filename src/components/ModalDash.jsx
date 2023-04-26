@@ -25,9 +25,9 @@ const ModalDash = ({isOpen, onClose}) => {
   async function onSubmit(data) {}
 
   return (
-    <>
+   
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
+        <ModalOverlay  />
         <ModalContent style={{ background: "#18181b", color: "#f4f4f5" }}>
           <ModalHeader>Novo Dashboard</ModalHeader>
           <ModalCloseButton />
@@ -116,7 +116,7 @@ const ModalDash = ({isOpen, onClose}) => {
           </ModalBody>
         </ModalContent>
       </Modal>
-    </>
+
   );
 };
 
