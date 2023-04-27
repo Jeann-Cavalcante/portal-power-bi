@@ -19,3 +19,20 @@ body {
   background: #065f46;
 
 }
+
+.powerbi-embed {
+  width: 100%;
+  height: 100%;
+}
+
+.powerbi-embed * {
+  box-sizing: border-box;
+}
+
+.powerbi-embed .chromeless > .chrome-toolbar {
+  display: none !important;
+}
+
+.powerbi-embed .chromeless > .chrome-footer {
+  display: none !important;
+}

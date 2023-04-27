@@ -8,8 +8,10 @@ import {
   TableCaption,
   TableContainer,
 } from "@chakra-ui/react";
+import { ChartBar } from "@phosphor-icons/react";
+import Link from "next/link";
 
-const TableBi = () => {
+const TableBi = ({dashs}) => {
   return (
     <div className="flex flex-col">
       <TableContainer>
@@ -19,27 +21,24 @@ const TableBi = () => {
             <Tr>
               <Th>Nome</Th>
               <Th>Categoria</Th>
-              <Th isNumeric>Link</Th>
+              <Th>Link</Th>
             </Tr>
           </Thead>
           <Tbody>
-            <Tr>
-              <Td>inches</Td>
-              <Td>millimetres (mm)</Td>
-              <Td isNumeric>25.4</Td>
-            </Tr>
-            <Tr>
-              <Td>feet</Td>
-              <Td>centimetres (cm)</Td>
-              <Td isNumeric>30.48</Td>
-            </Tr>
-            <Tr>
-              <Td>yards</Td>
-              <Td>metres (m)</Td>
-              <Td isNumeric>0.91444</Td>
-            </Tr>
+            {dashs.map((dash) => (
+              <Tr key={dash.id}>
+                <Td>{dash.name}</Td>
+                <Td>{dash.category}</Td>
+                <Td>
+                  <Link href={`/dashboards/${dash.id}`}>
+                    <div className="bg-emerald-700 p-2 inline-block rounded-md" >
+                      <ChartBar size={28} weight="bold" />
+                    </div>
+                  </Link>
+                </Td>
+              </Tr>
+            ))}
           </Tbody>
-  
         </Table>
       </TableContainer>
     </div>

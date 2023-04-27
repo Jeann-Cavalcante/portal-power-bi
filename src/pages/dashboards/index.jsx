@@ -4,8 +4,9 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import { useDisclosure } from "@chakra-ui/react";
 import ModalDash from "@/components/ModalDash";
 import TableBi from "@/components/TableBi";
+import { PrismaClient } from "@prisma/client";
 
-const Dashboards = () => {
+const Dashboards = ({dashs}) => {
   const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
@@ -24,7 +25,7 @@ const Dashboards = () => {
             </button>
           </div>
 
-          <TableBi />
+          <TableBi dashs={dashs} />
         </div>
 
         {isOpen && <ModalDash isOpen={isOpen} onClose={onClose} />}
@@ -36,6 +37,7 @@ const Dashboards = () => {
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
   console.log(session);
+
   if (!session) {
     return {
       redirect: {
@@ -45,9 +47,22 @@ export async function getServerSideProps(context) {
     };
   }
 
+  const prisma = new PrismaClient();
+
+  const dashs = await prisma.dash.findMany({
+    select: {
+      id: true,
+      name: true,
+      category: true,
+      slug: true,
+    }
+  });
+
+
   return {
     props: {
       session,
+      dashs,
     },
   };
 }
