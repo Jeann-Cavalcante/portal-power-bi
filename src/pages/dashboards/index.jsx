@@ -25,7 +25,11 @@ const Dashboards = ({dashs}) => {
             </button>
           </div>
 
-          <TableBi dashs={dashs} />
+          <TableBi
+            title="Todos Dashboards"
+            thTile="Nome, Categoria, Link"
+            dashs={dashs}
+          />
         </div>
 
         {isOpen && <ModalDash isOpen={isOpen} onClose={onClose} />}
