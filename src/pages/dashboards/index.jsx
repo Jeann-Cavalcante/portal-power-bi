@@ -1,27 +1,12 @@
 import Layout from "@/components/Layout";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../api/auth/[...nextauth]";
-import {
-  Table,
-  Thead,
-  Tbody,
-  Tr,
-  Th,
-  Td,
-  TableCaption,
-  TableContainer,
-  Modal,
-  useDisclosure,
-  Tfoot,
-} from "@chakra-ui/react";
+import { useDisclosure } from "@chakra-ui/react";
 import ModalDash from "@/components/ModalDash";
-import { useState } from "react";
 import TableBi from "@/components/TableBi";
-
 
 const Dashboards = () => {
   const { isOpen, onClose, onOpen } = useDisclosure();
-
 
   return (
     <Layout>
@@ -46,7 +31,7 @@ const Dashboards = () => {
       </div>
     </Layout>
   );
-}
+};
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
