@@ -1,5 +1,6 @@
 import Layout from "@/components/Layout";
 import { PrismaClient } from "@prisma/client";
+import { cache } from "react";
 
 const Dash = ({dash}) => {
 
@@ -27,6 +28,8 @@ export async function getStaticPaths() {
       category: true,
       slug: true,
     },
+  }).catch((err) => {
+    console.log(err);
   });
 
   const paths = dashs.map((dash) => {
