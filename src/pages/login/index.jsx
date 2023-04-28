@@ -19,8 +19,10 @@ const Login = () => {
   const router = useRouter();
 
   
-  async function handleLogin (e) {
+  async function handleLogin (e) { 
+
     e.preventDefault();
+    
     if (!email || !password) {
       toast.error('Preencha todos os campos');
       return;
@@ -42,7 +44,7 @@ const Login = () => {
         setLoading(false);
         resolve();
       }, 2000);
-      
+
     }); 
 
   }
