@@ -22,6 +22,12 @@ export default async function update(req, res) {
         id: id,
       },
       data: userData,
+      select: {
+        id: true,
+        name: true,
+        email: true,
+        role: true,
+      },
     }).catch((error) => {
       res.status(400).json({ error: true, message: "Erro ao atualizar usuário", error });
       console.log(error);

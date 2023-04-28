@@ -3,8 +3,9 @@ import { authOptions } from "../api/auth/[...nextauth]";
 import { getServerSession } from "next-auth";
 import { PrismaClient } from "@prisma/client";
 import { useForm } from "react-hook-form";
-import { Input } from "@chakra-ui/react";
+import { Input, Spinner } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
 const Config = ({ user }) => {
   const [loading, setLoading] = useState(false);
@@ -18,7 +19,32 @@ const Config = ({ user }) => {
   } = useForm();
 
   async function onSubmit(data) {
-    console.log("🚀 ~ file: index.jsx:21 ~ onSubmit ~ data:", data);
+    setLoading(true);
+    const dataItem = {
+      id: user.id,
+      name: data.name,
+      email: data.email,
+    }
+    if(data.password) {
+      dataItem.password = data.password;
+    }
+
+    const response = await fetch("/api/patch/update", {
+      headers: { "Content-Type": "application/json" },
+      method: "PATCH",
+      body: JSON.stringify(dataItem),
+    });
+
+    const dataResponse = await response.json();
+
+    if (dataResponse.error) {
+      toast.error(dataResponse.message);
+      setLoading(false);
+      return;
+    }
+
+    toast.success(dataResponse.message);
+    setLoading(false);
   }
 
   useEffect(() => {
