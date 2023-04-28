@@ -25,37 +25,44 @@ const ModalDash = ({isOpen, onClose}) => {
   } = useForm();
 
   async function onSubmit(data) {
-    setLoading(true);
-    console.log(data);
-    const response = await fetch("http://localhost:3000/api/post/dashs/create", {
-      headers: { "Content-Type": "application/json" },
-      method: "POST",
-      body: JSON.stringify(data),
-    });
-
-    const api = await response.json();
-
-    console.log(api);
-
-    if (api.error) {
-      toast.error(api.message);
-        if(api.message === "Slug já cadastrado"){
-          setError("slug", {
-            type: "manual",
-            message: api.message,
-          });
-
-        }
+    try {
+      
+      setLoading(true);
+      console.log(data);
+      const response = await fetch("/api/post/dashs/create", {
+        headers: { "Content-Type": "application/json" },
+        method: "POST",
+        body: JSON.stringify(data),
+      })
+  
+      const api = await response.json();
+  
+      console.log(api);
+  
+      if (api.error) {
+        toast.error(api.message);
+          if(api.message === "Slug já cadastrado"){
+            setError("slug", {
+              type: "manual",
+              message: api.message,
+            });
+  
+          }
+        setLoading(false);
+  
+        return;
+      }
+  
+      toast.success(api.message);
+  
       setLoading(false);
-
-      return;
+  
+      onClose();
+    } catch (error) {
+      console.log(error);
+      toast.error("Erro ao cadastrar o dashboard");
+      setLoading(false);      
     }
-
-    toast.success(api.message);
-
-    setLoading(false);
-
-    onClose();
   }
 
   return (
