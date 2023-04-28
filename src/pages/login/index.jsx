@@ -35,8 +35,14 @@ const Login = () => {
       return;
     }
     
-    router.push('/');
-    setLoading(false);
+    router.push('/')
+
+    new Promise((resolve) => {
+      setTimeout(() => {
+        setLoading(false);
+        resolve();
+      }, 2000);
+    }); 
 
   }
   return (
@@ -80,8 +86,8 @@ const Login = () => {
               />
             </div>
 
-            <div className="flex justify-end">
-              <Link href="/registration">
+            <div className="flex justify-end ">
+              <Link className="hover:text-emerald-700 hover:underline" href="/registration">
                 Não possui conta ? Faça seu cadastro
               </Link>
             </div>
