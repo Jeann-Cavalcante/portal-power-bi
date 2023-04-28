@@ -1,6 +1,5 @@
 import Layout from "@/components/Layout";
 import { PrismaClient } from "@prisma/client";
-import { cache } from "react";
 
 const Dash = ({dash}) => {
 
