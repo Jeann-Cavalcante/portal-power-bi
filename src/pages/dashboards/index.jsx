@@ -40,7 +40,6 @@ const Dashboards = ({dashs}) => {
 
 export async function getServerSideProps(context) {
   const session = await getServerSession(context.req, context.res, authOptions);
-  console.log(session);
 
   if (!session) {
     return {

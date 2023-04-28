@@ -7,13 +7,14 @@ import { PrismaClient } from "@prisma/client";
 const Users = ({ users }) => {
   return (
     <Layout>
-      <h1>Usuários</h1>
+      <h1 className="text-3xl mb-6 font-bold">Usuários</h1>
 
       <div>
-        <TableBi 
-        title='Todos usuários ativos' 
-        users={users}
-        thTile='Nome, Email, Role' />
+        <TableBi
+          title="Todos usuários ativos"
+          users={users}
+          thTile="Nome, Email, Role"
+        />
       </div>
     </Layout>
   );
@@ -45,8 +46,6 @@ export async function getServerSideProps(context) {
       active: true,
     },
   });
-
-  console.log(users);
 
   return {
     props: {

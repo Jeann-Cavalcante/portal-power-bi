@@ -1,7 +1,7 @@
 import Logo from "@/components/ui/Logo";
 import { Input } from "@chakra-ui/react";
 import { getServerSession } from "next-auth";
-import { signIn, useSession } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -14,7 +14,6 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const {data: session} = useSession();
   const router = useRouter();
 
   
