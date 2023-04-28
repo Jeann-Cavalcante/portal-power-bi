@@ -8,11 +8,6 @@ const Header = () => {
   const [menuActive, setMenuActive] = useState(false);
   const router = useRouter();
 
-  function handleLogout() {
-    signOut();
-    router.push("/login");
-  }
-
   useEffect(() => {
     setMenuActive(false);
   }, [router.pathname]);
@@ -34,7 +29,7 @@ const Header = () => {
         </h1>
 
         <div
-          onClick={handleLogout}
+          onClick={() => signOut()}
           className="text-zinc-600 cursor-pointer flex font-semibold gap-x-2 duration-300 hover:text-emerald-700"
         >
           <SignOut size={34} weight="fill" />

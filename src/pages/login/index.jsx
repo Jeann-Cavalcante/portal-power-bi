@@ -6,10 +6,13 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { authOptions } from "../api/auth/[...nextauth]";
+import { toast } from "react-toastify";
+import { Spinner } from "@phosphor-icons/react";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const {data: session} = useSession();
   const router = useRouter();
@@ -18,22 +21,22 @@ const Login = () => {
   async function handleLogin (e) {
     e.preventDefault();
     if (!email || !password) {
-      alert('Preencha todos os campos');
+      toast.error('Preencha todos os campos');
       return;
     }
+    setLoading(true);
     
     const request = await signIn('credentials', {redirect: false, email, password});
     
-    console.log(request);
     if (request?.error) {
-      alert('Usuário ou senha inválidos');
+      toast.error("Usuário ou senha inválidos");
+      setLoading(false);
       return;
     }
     
     router.push('/');
-    
-    console.log(session);
-    // console.log(jwt);
+    setLoading(false);
+
   }
   return (
     <div className="min-h-screen bg-zinc-950 p-2 text-zinc-200 flex justify-center items-center">
@@ -49,6 +52,7 @@ const Login = () => {
             <Input
               focusBorderColor="#047857"
               type="email"
+              disabled={loading}
               placeholder="Digite seu E-mail"
               borderColor="#a1a1aa"
               name="email"
@@ -63,6 +67,7 @@ const Login = () => {
               focusBorderColor="#047857"
               type="password"
               name="password"
+              disabled={loading}
               placeholder="Digite sua senha"
               borderColor="#a1a1aa"
               value={password}
@@ -77,11 +82,16 @@ const Login = () => {
           </div>
 
           <button
-            className="bg-emerald-700 p-2 hover:bg-emerald-900 duration-300 rounded-md text-lg mt-4 font-bold"
+            className="bg-emerald-700 flex gap-3 justify-center items-center p-2 hover:bg-emerald-900 duration-300 rounded-md text-lg mt-4 font-bold"
             type="submit"
+            disabled={loading}  
             onClick={handleLogin}
           >
+            {loading && <Spinner className="animate-spin mr-2" size={30} />}
+            <span>
+
             Entrar
+            </span>
           </button>
         </form>
       </main>
