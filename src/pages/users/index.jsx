@@ -9,7 +9,7 @@ const Users = ({ users }) => {
     <Layout>
       <h1 className="text-3xl mb-6 font-bold">Usuários</h1>
 
-      <div>
+      <div className="rounded-xl w-full p-2 sm:p-4 bg-zinc-900 lg:max-w-[1200px] mx-auto">
         <TableBi
           title="Todos usuários ativos"
           users={users}

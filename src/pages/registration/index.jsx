@@ -59,7 +59,7 @@ const Registration = () => {
 
   return (
     <div className="min-h-screen bg-zinc-950 p-2 text-zinc-200 flex justify-center items-center">
-      <main className="bg-zinc-900 p-6 rounded-md w-full max-w-[500px] flex flex-col items-center">
+      <main className="bg-zinc-900 px-6 py-12 rounded-md w-full max-w-[1000px] flex flex-col items-center">
         <h1 className="text-3xl mb-6 font-bold">Faça login</h1>
         <div className="w-[120px]">
           <Logo />
@@ -67,7 +67,7 @@ const Registration = () => {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex mt-3 flex-col w-full"
+          className="flex mt-3 flex-col w-full max-w-[500px]"
         >
           <div>
             <label>Nome</label>
