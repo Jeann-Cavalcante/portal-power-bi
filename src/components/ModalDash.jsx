@@ -3,10 +3,8 @@ import {
   ModalOverlay,
   ModalContent,
   ModalHeader,
-  ModalFooter,
   ModalBody,
   ModalCloseButton,
-  Button,
   Input,
   Spinner,
 } from "@chakra-ui/react";
@@ -28,7 +26,6 @@ const ModalDash = ({isOpen, onClose}) => {
     try {
       
       setLoading(true);
-      console.log(data);
       const response = await fetch("/api/post/dashs/create", {
         headers: { "Content-Type": "application/json" },
         method: "POST",
@@ -36,8 +33,6 @@ const ModalDash = ({isOpen, onClose}) => {
       })
   
       const api = await response.json();
-  
-      console.log(api);
   
       if (api.error) {
         toast.error(api.message);

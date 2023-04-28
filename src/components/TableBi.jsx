@@ -15,10 +15,6 @@ import { useEffect } from "react";
 const TableBi = ({dashs, title, users, thTile}) => {
   const ThTile = thTile.split(',');
   let items = dashs || users;
-  useEffect(() => {
-    const ThTile = thTile.split(',');
-    console.log(ThTile);
-  }, []);
   return (
     <div className="flex flex-col">
       <TableContainer>

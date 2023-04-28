@@ -28,15 +28,12 @@ export async function getStaticPaths() {
       slug: true,
     },
   });
-  console.log("🚀 ~ file: [slug].jsx:24 ~ getStaticPaths ~ dashs:", dashs)
-
 
   const paths = dashs.map((dash) => {
     return {
     params: { slug: dash.id.toString() },
     }
   });
-  console.log("🚀 ~ file: [slug].jsx:31 ~ paths ~ paths:", paths);
 
   return {
     paths,
@@ -58,7 +55,6 @@ export async function getStaticProps({ params }) {
       slug: true,
     },
   });
-  console.log("🚀 ~ file: [slug].jsx:53 ~ getStaticProps ~ dash:", dash)  
 
   return {
     props: {
